@@ -7,7 +7,7 @@
 
 #include "Paddles.h"
 
-// #include "Ball.h"
+ #include "Ball.h"
 
 APlayerControllerPadle::APlayerControllerPadle()
 {
@@ -24,25 +24,44 @@ void APlayerControllerPadle::BeginPlay()
 
 	//shows camera for the player at the zero index
 	SetViewTarget(CameraActors[0], Params);
+
+	SpawnNewBall();
+
 }
 
 void APlayerControllerPadle::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	//Enables this movement on player controller I created
+	//Enables this movement on player controller created in unreal under edit project/input.
 	EnableInput(this);
 	InputComponent->BindAxis("MoveHorizontal", this, &APlayerControllerPadle::MoveHorizontal);
-
+	InputComponent->BindAction("Launch", IE_Pressed, this, &APlayerControllerPadle::Launch);
 }
 //AxisValue is for scale parameter in movement
 void APlayerControllerPadle::MoveHorizontal(float AxisValue)
 {
 	//auto will detect value on the right side as the same type
-	//auto MyPawn = Cast<APlayerControllerPadle>(GetPawn());
+
 	auto MyPawn = Cast<APaddles>(GetPawn());
 
 	if (MyPawn) {
 		MyPawn->MoveHorizontal(AxisValue);
 	}
 	}
+
+void APlayerControllerPadle::Launch()
+{
+
+	MyBall->Launch();
+}
+
+void APlayerControllerPadle::SpawnNewBall()
+{
+	if (!MyBall)
+		MyBall = nullptr;
+	if (BallObj) {
+		MyBall = GetWorld()->SpawnActor<Aball>(BallObj, SpawnLocation, SpawnRotation, SpawnInfo);
+
+	}
+}

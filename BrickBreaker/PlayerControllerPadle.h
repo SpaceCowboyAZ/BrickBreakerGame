@@ -6,10 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "PlayerControllerPadle.generated.h"
 
+class Aball;
 
-/**
- * 
- */
 UCLASS()
 class BRICKBREAKER_API APlayerControllerPadle : public APlayerController
 {
@@ -24,6 +22,22 @@ protected:
 	void MoveHorizontal(float AxisValue);
 
 	//ball references below
+
+	void Launch();
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<Aball> BallObj;
+
+	Aball* MyBall;
+
+	//need these 3 to spawn an actor
+	FVector SpawnLocation = FVector(10.0f, 0.0f, 40.0f);
+	FRotator SpawnRotation = FRotator(0.0f, 0.0f, 0.0f);
+	FActorSpawnParameters SpawnInfo;
+
+public:
+
+	void SpawnNewBall();
 
 
 
