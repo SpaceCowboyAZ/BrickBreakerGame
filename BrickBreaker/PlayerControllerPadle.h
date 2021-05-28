@@ -25,10 +25,11 @@ protected:
 
 	void Launch();
 
-	UPROPERTY(EditAnywhere)
-		TSubclassOf<Aball> BallObj;
 
-	Aball* MyBall;
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<Aball> ballObj;
+
+	Aball* Myball;
 
 	//need these 3 to spawn an actor
 	FVector SpawnLocation = FVector(10.0f, 0.0f, 40.0f);
@@ -37,7 +38,7 @@ protected:
 
 public:
 
-	void SpawnNewBall();
+	void SpawnNewball();
 
 
 

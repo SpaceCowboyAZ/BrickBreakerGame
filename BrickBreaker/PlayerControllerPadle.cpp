@@ -1,13 +1,12 @@
 
 
-
 #include "PlayerControllerPadle.h"
+
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraActor.h"
 
 #include "Paddles.h"
-
- #include "Ball.h"
+#include "ball.h"
 
 APlayerControllerPadle::APlayerControllerPadle()
 {
@@ -25,7 +24,7 @@ void APlayerControllerPadle::BeginPlay()
 	//shows camera for the player at the zero index
 	SetViewTarget(CameraActors[0], Params);
 
-	SpawnNewBall();
+	SpawnNewball();
 
 }
 
@@ -48,20 +47,21 @@ void APlayerControllerPadle::MoveHorizontal(float AxisValue)
 	if (MyPawn) {
 		MyPawn->MoveHorizontal(AxisValue);
 	}
-	}
+}
 
 void APlayerControllerPadle::Launch()
 {
 
-	MyBall->Launch();
+	Myball->Launch();
 }
 
-void APlayerControllerPadle::SpawnNewBall()
+void APlayerControllerPadle::SpawnNewball()
 {
-	if (!MyBall)
-		MyBall = nullptr;
-	if (BallObj) {
-		MyBall = GetWorld()->SpawnActor<Aball>(BallObj, SpawnLocation, SpawnRotation, SpawnInfo);
+	if (!Myball)
+		Myball = nullptr;
+
+	if (ballObj) {
+		Myball = GetWorld()->SpawnActor<Aball>(ballObj, SpawnLocation, SpawnRotation, SpawnInfo);
 
 	}
 }

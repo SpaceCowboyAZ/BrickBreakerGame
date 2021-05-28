@@ -17,7 +17,8 @@ public:
 	Aball();
 	
 	virtual void Launch();
-	bool BallLaunched;
+
+	bool ballLaunched;
 
 protected:
 	// Called when the game starts or when spawned
@@ -37,5 +38,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION()
-		UStaticMeshComponent* GetBall();
+		UStaticMeshComponent* Getball();
 };
